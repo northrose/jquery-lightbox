@@ -1,4 +1,4 @@
-describe('jQuery Lightbox Core', function() {
+describe("jQuery Lightbox Core", function() {
 
     var $e, $na;
 
@@ -32,6 +32,34 @@ describe('jQuery Lightbox Core', function() {
         var pluginData = $e.data("plugin_lightbox");
         expect(pluginData.settings.myKey).toBe("test value");
     });
+    it("Should allow custom callback configuration", function () {
+        $e.lightbox({
+            callbacks: {
+                openSuccess: function(data) {
+                    return;
+                }
+            }
+        });
+        var pluginData = $e.data("plugin_lightbox");
+        expect(typeof pluginData.settings.callbacks.openSuccess).toBe("function");
+        expect(pluginData.settings.callbacks.openFailure).toBeNull();
+    });
+});
+
+describe("jQuery Lightbox CSS", function () {
+    var $e, instance;
+
+    beforeEach(function () {
+        jasmine.getFixtures().fixturesPath = "base/test/spec";
+        jasmine.getStyleFixtures().fixturesPath = "base/test/spec";
+        loadFixtures("lightbox-spec.html");
+        loadStyleFixtures("lightbox-spec.css");
+        $e = $(".test-container");
+        instance = $e.lightbox().data("plugin_lightbox");
+    });
+    it("Should have CSS loaded", function () {
+        expect($(".hidden").is(":visible")).not.toBe(true);
+    });
 });
 
 describe("jQuery Lightbox Routines", function () {
@@ -40,7 +68,7 @@ describe("jQuery Lightbox Routines", function () {
     beforeEach(function () {
         jasmine.getFixtures().fixturesPath = "/Users/damien/develop/libraries/jquery-lightbox/test/spec";
         loadFixtures("lightbox-spec.html");
-        $body = $("body")
+        $body = $("body");
         $e = $(".test-container");
         instance = $e.lightbox().data("plugin_lightbox");
     });
@@ -54,14 +82,64 @@ describe("jQuery Lightbox Routines", function () {
         var $errorContainer = $(".alert-error");
         var $link = $(".lightbox-test-container .link-without-url");
         $link.lightbox();
+        expect($errorContainer.is(":visible")).toBe(false);
         $link.trigger("click");
         expect($errorContainer.html()).toBe("URL not provided.");
+        expect($errorContainer.is(":visible")).toBe(true);
     });
-    it("Should not display error message when url is not specified", function() {
-        var $errorContainer = $(".alert-error");
-        var $link = $(".lightbox-test-container .lightbox-link");
+});
+
+describe("jQuery Lightbox AJAX", function () {
+    var $e, instance,
+        request, onSuccess, onFailure;
+    beforeEach(function () {
+        jasmine.getFixtures().fixturesPath = "base/test/spec";
+        jasmine.getStyleFixtures().fixturesPath = "base/test/spec";
+        loadFixtures("lightbox-spec.html");
+        loadStyleFixtures("lightbox-spec.css");
+        $e = $(".test-container");
+        instance = $e.lightbox().data("plugin_lightbox");
+
+        jasmine.Ajax.install();
+    });
+
+    afterEach(function () {
+        jasmine.Ajax.uninstall();
+    });
+
+    it("Should allow you to specify a response when needed", function () {
+
+        var ajaxResponse = "<div>This is the test response.</div>";
+        var onSuccess = jasmine.createSpy("success");
+        var $link = $(".lightbox-link");
         $link.lightbox();
         $link.trigger("click");
-        expect($errorContainer.html()).toBe("");
+
+        expect(jasmine.Ajax.requests.mostRecent().url).toBe("https://staging.bfhhandwriting.com");
+        expect(onSuccess).not.toHaveBeenCalled();
+
+        // jasmine.Ajax.requests.mostRecent().response = ajaxResponse;
+        // expect(onSuccess).toHaveBeenCalledWith(ajaxResponse);
+    });
+
+    it("Should allow specifying a response ahead of time", function () {
+        var onSuccess = jasmine.createSpy("success");
+        var onFailure = jasmine.createSpy("failure");
+        jasmine.Ajax.stubRequest("https://staging.bfhhandwriting.com").andReturn({
+            responseText: 'test'
+        });
+        var $link = $(".lightbox-link");
+        $link.lightbox({
+            callbacks: {
+                openSuccess: function(data) {
+                    onSuccess(data);
+                },
+                openFailure: function(data) {
+                    onFailure(data);
+                }
+            }
+        });
+        $link.trigger("click");
+        expect(onFailure).toHaveBeenCalledWith('test');
     });
 });
