@@ -42,7 +42,8 @@ gulp.task('concat', function() {
    return gulp.src('./src/jquery.lightbox.js')
        .pipe(banner(comment, { pkg: pkg }))
        .pipe(concat('jquery.lightbox.js'))
-       .pipe(gulp.dest('./dist/'));
+       .pipe(gulp.dest('./dist/'))
+       .pipe(gulp.dest('./demo/public/js/'));
 });
 
 gulp.task('uglify', function() {
@@ -50,7 +51,8 @@ gulp.task('uglify', function() {
        .pipe(rename('jquery.lightbox.min.js'))
        .pipe(uglify())
        .pipe(banner(comment, { pkg: pkg }))
-       .pipe(gulp.dest('./dist/'));
+       .pipe(gulp.dest('./dist/'))
+       .pipe(gulp.dest('./demo/public/js/'));
 });
 
 gulp.task('lint', ['jshint'], function(cb) {
