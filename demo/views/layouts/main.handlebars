@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <!--// jQuery UI CSS //-->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css" />
+</head>
+<body>
+{{{body}}}
+
+<!--// dialog container markup //-->
+<div id="globalDialog" title="">
+    <div class="alert alert-error hidden"><!-- --></div>
+    <div class="alert alert-success hidden"><!-- --></div>
+    <div class="dialog-content"><!-- --></div>
+</div>
+
+<!--// jQuery and jQuery UI -->
+<script src="//code.jquery.com/jquery-1.12.2.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="../dist/jquery.lightbox.js"></script>
+<script>
+    /**
+     * Binding jQuery handlers
+     */
+    $( function() {
+        $( ".lightbox-image" ).lightbox( {
+            dialogType: "image",
+            urls: {
+                imageDialog: "http://localhost:8888/image-lightbox"
+            }
+        } );
+    } );
+</script>
+</body>
+</html>
