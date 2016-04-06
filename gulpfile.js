@@ -33,7 +33,12 @@ gulp.task('jscs', function() {
 });
 
 gulp.task('concat', function() {
-   return gulp.src('./src/jquery.lightbox.js')
+   return gulp.src([ 
+       './src/northrose.lightboxLink.js', 
+       './src/northrose.imageLightboxLink.js', 
+       './src/northrose.formLightboxLink.js', 
+       './src/jquery.lightbox.js' 
+   ] )
        .pipe($.banner(comment, { pkg: pkg }))
        .pipe($.concat('jquery.lightbox.js'))
        .pipe(gulp.dest('./dist/'))
@@ -51,14 +56,20 @@ gulp.task('uglify', function() {
 
 gulp.task('sass', function() {
    return gulp.src('scss/app.scss')
-       .pipe($.sass())
-       .on('error', $.sass.logError)
+       .pipe($.compass({
+           project: __dirname,
+           sass: 'scss'
+       }))
+       .on('error', function(error) {
+            console.log(error);
+            this.emit('end');
+        })
        .pipe($.autoprefixer({
            browsers: ['last 2 versions', 'ie >= 9']
        }))
        .pipe($.cssnano())
        .pipe(gulp.dest('./demo/public/css/'))
-       .pipe($.rename('jquery-lightbox.css'))
+       .pipe($.rename('northrose-modallink.css'))
        .pipe(gulp.dest('./dist/'));
 });
 

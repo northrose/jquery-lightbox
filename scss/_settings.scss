@@ -1,0 +1,15 @@
+// app //
+$app-base-font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+
+// info //
+$info-text-color: #567;
+$info-background-color: #f0f8ff;
+$info-border-color: #e0e8ff;
+$info-border: 1px solid $info-border-color;
+
+// alerts //
+$alert-text-color: #f00;
+$alert-title-color: #930;
+$alert-background-color: #fff8f8;
+$alert-border-color: mix($alert-text-color, $alert-background-color, 10%);
+$alert-border: 1px solid $alert-border-color;

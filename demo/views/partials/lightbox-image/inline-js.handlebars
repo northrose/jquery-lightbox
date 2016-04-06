@@ -10,5 +10,12 @@
                 imageDialog: "http://localhost:3000/lightbox/image"
             }
         } );
+        $( ".lightbox-link-test" ).lightboxLink();
+        $( ".image-lightbox-link-test" ).imageLightboxLink({
+            urls: {
+                dialogContent: "http://localhost:3000/lightbox/image"
+            }
+        });
+        $( ".form-lightbox-link-test" ).formLightboxLink();
     } );
 </script>

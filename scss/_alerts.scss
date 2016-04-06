@@ -1,0 +1,25 @@
+@mixin alert( $text-color, $background-color, $border-color ) {
+	color: $text-color;
+	background-color: $background-color;
+	border: 1px solid $border-color;
+	@include border-radius(4px, 4px);
+	padding: 6px 10px;
+	margin-bottom: 12px;
+}
+.alert {
+	background-color: $alert-background-color;
+}
+.alert-success,
+.alert-info {
+	@include alert($info-text-color, $info-background-color, $info-border-color);
+}
+.alert-error {
+	@include alert($alert-text-color, $alert-background-color, $alert-border-color);
+	h3 {
+		margin-bottom: -0.7em;
+		color: $alert-text-color;
+		font: {
+			family: $app-base-font-family;
+		}
+	}
+}
