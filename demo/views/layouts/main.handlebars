@@ -3,8 +3,9 @@
 <head>
     <title>{{title}}</title>
     <!--// jQuery UI CSS //-->
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
     <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/app.css" />
 </head>
 <body>
 {{{body}}}
@@ -26,6 +27,7 @@
      */
     jQuery( function( $ ) {
         $( ".lightbox-image" ).lightbox( {
+            cssClass: "lightbox-image",
             dialogType: "image",
             urls: {
                 imageDialog: "http://localhost:3000/lightbox/image"

@@ -49,10 +49,23 @@ gulp.task('uglify', function() {
        .pipe(gulp.dest('./demo/public/js/'));
 });
 
+gulp.task('sass', function() {
+   return gulp.src('scss/app.scss')
+       .pipe($.sass())
+       .on('error', $.sass.logError)
+       .pipe($.autoprefixer({
+           browsers: ['last 2 versions', 'ie >= 9']
+       }))
+       .pipe($.cssnano())
+       .pipe(gulp.dest('./demo/public/css/'))
+       .pipe($.rename('jquery-lightbox.css'))
+       .pipe(gulp.dest('./dist/'));
+});
+
 gulp.task('lint', ['jshint'], function(cb) {
     runSequence(['jscs'], cb);
 });
-gulp.task('build', ['concat'], function(cb) {
+gulp.task('build', ['concat', 'sass'], function(cb) {
     runSequence(['uglify'], cb);
 });
 gulp.task('default', ['jshint', 'build', 'tests']);

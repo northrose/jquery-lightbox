@@ -105,6 +105,15 @@
             $( this.settings.dom.overlay )
                 .on( "click", $.proxy( this.close, this ) );
 
+            switch ( this.settings.dialogType ) {
+                case "image":
+                    $( this.settings.modalContentContainer + " img" )
+                        .on( "click", $.proxy( this.close, this ) );
+                    break;
+                default:
+                    /* nothing required */
+            }
+            
             if ( typeof e.settings.callbacks.modalContentLoaded === "function" ) {
                 var f = e.settings.callbacks.modalContentLoaded;
                 f.apply( e, Array.prototype.slice.call( arguments, 1 ) );

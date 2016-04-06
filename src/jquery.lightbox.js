@@ -28,7 +28,7 @@
                 modalContainer: "#globalDialog",
                 modalContentContainer: "#globalDialog .dialog-content",
                 modalErrorContainer: "#globalDialog .alert-error",
-                modalWidget: '.ui-dialog',
+                modalWidget: ".ui-dialog",
                 overlay: ".ui-widget-overlay",
                 submitButton: "dlg-commit-btn"
             },
@@ -58,8 +58,8 @@
     $.extend( Plugin.prototype, {
 
         /**
-         * Binds handlers to modal dialog elements. Invokes callbacks after loading dialog content, or after dialog 
-         * content failures.
+         * Binds handlers to modal dialog elements. Invokes callbacks after
+         * loading dialog content, or after dialog content failures.
          * @param response object
          * @param status string
          * @param xhr jqXHR
@@ -68,6 +68,7 @@
 
             var e = this;
             if ( status === "error" ) {
+                /* handle ajax errors */
                 this.displayError( "Error loading dialog: " + xhr.statusText );
                 if ( typeof e.settings.callbacks.openFailure === "function" ) {
                     e.settings.callbacks.openFailure( data );
@@ -75,28 +76,46 @@
                 return;
             }
 
+            /* display the dialog element */
             $( this.settings.dom.modalContainer ).dialog( "open" );
-            
+
+            /* center the dialog after images have been loaded */
             $( this.settings.dom.modalContentContainer + " img" )
-                .on( "load", function () {
+                .on( "load", function() {
                     $( e.settings.dom.modalWidget )
-                        .position ( {
+                        .position( {
                             my: "center",
                             at: "center",
                             of: $( e.settings.dom.overlay )
                         } );
                 } );
-            
+
+            /* datepicker widgets */
             $( this.settings.dom.datePicker, $( this.element ) ).datepicker();
+
+            /* form buttons */
             $( this.settings.dom.submitButton, $( this.element ) )
                 .button()
                 .on( "click", $.proxy( this.commitOperation, this ) );
             $( this.settings.dom.cancelButton, $( this.element ) )
                 .button()
                 .on( "click", $.proxy( this.close, this ) );
+
+            /* dismiss dialog by clicking on overlay */
             $( this.settings.dom.overlay )
                 .on( "click", $.proxy( this.close, this ) );
 
+            /* dismiss dialog by clicking on images */
+            switch ( this.settings.dialogType ) {
+                case "image":
+                    $( this.settings.dom.modalContentContainer + " img" )
+                        .on( "click", $.proxy( this.close, this ) );
+                    break;
+                default:
+                    /* nothing required */
+            }
+
+            /* invoke user-defined callback */
             if ( typeof e.settings.callbacks.modalContentLoaded === "function" ) {
                 var f = e.settings.callbacks.modalContentLoaded;
                 f.apply( e, Array.prototype.slice.call( arguments, 1 ) );
@@ -153,24 +172,24 @@
          * @param evt
          */
         open: function( evt ) {
-            evt.preventDefault ();
+            evt.preventDefault();
             try {
                 var p;
-                switch (this.settings.dialogType) {
+                switch ( this.settings.dialogType ) {
                     case "image":
-                        p = this.collectImageDialogProperties ();
+                        p = this.collectImageDialogProperties();
                         break;
                     default:
-                        p = this.collectDialogProperties ();
+                        p = this.collectDialogProperties();
                 }
             }
-            catch (err) {
-                this.displayError (err);
+            catch ( err ) {
+                this.displayError( err );
                 return;
             }
 
             $( this.settings.dom.modalContainer )
-                .dialog ({
+                .dialog( {
                     autoOpen: false,
                     closeOnEscape: true,
                     dialogClass: this.settings.cssClass,
@@ -183,10 +202,9 @@
                     },
                     title: "",
                     width: this.settings.width
-                });
-            
-            $(this.settings.dom.modalContentContainer)
-                .load(p.url, p.data, $.proxy(this.bindDialogHandlers, this));
+                } );
+            $( this.settings.dom.modalContentContainer )
+                .load( p.url, p.data, $.proxy( this.bindDialogHandlers, this ) );
         }
     } );
 
