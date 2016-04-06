@@ -21,19 +21,6 @@
 <script src="//code.jquery.com/jquery-1.12.2.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script src="/js/jquery.lightbox.js"></script>
-<script>
-    /**
-     * Binding jQuery handlers
-     */
-    jQuery( function( $ ) {
-        $( ".lightbox-image" ).lightbox( {
-            cssClass: "lightbox-image",
-            dialogType: "image",
-            urls: {
-                imageDialog: "http://localhost:3000/lightbox/image"
-            }
-        } );
-    } );
-</script>
+{{> (lookup . 'inlineJS')}}
 </body>
 </html>

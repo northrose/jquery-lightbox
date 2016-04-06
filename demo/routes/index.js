@@ -3,7 +3,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('home', { title: 'jQuery Lightbox Demo' });
+  res.render('home', {
+      title: 'jQuery Lightbox Demo',
+      inlineJS: 'lightbox-image/inline-js'
+  });
 });
 
 router.post('/lightbox/image', function( req, res ) {
@@ -17,9 +20,10 @@ router.post('/lightbox/image', function( req, res ) {
     }
 
     res.render('lightbox-image', {
-        layout: false,
         src: src,
-        alt: req.body.alt
+        alt: req.body.alt,
+
+        layout: false
     });
 } );
 
