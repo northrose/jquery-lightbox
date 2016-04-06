@@ -27,6 +27,11 @@ Lightbox widgets that extend [jQuery UI's dialog](https://jqueryui.com/dialog/) 
 		propertyName: "a custom value"
 	});
 	```
+
+### Options 
+
+TK
+
 ## Prerequisites
 
 ### `npm`
@@ -39,6 +44,12 @@ Install `karma` globally.
 
 ```
 npm install karma -g
+```
+
+Run tests (from project root directory) with 
+
+```
+gulp tests
 ```
 
 ## Installation
