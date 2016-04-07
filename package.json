@@ -1,7 +1,7 @@
 {
-  "name": "jquery-lightbox",
-  "version": "0.0.1",
-  "description": "Basic lightbox built off jQuery UI modal dialogs",
+  "name": "lightboxLink",
+  "version": "0.1.0",
+  "description": "Attach behaviors to DOM elements that will open modal lightbox dialogs",
   "keywords": [
     "jquery-plugin",
     "jquery",
@@ -12,10 +12,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/northrose/jquery-lightbox.git"
+    "url": "https://github.com/northrose/lightboxLink.git"
   },
   "bugs": {
-    "url": "https://github.com/northrose/jquery-lightbox/issues"
+    "url": "https://github.com/northrose/lightboxLink/issues"
   },
   "author": {
     "name": "Damien Barchowsky",
