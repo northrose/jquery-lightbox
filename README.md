@@ -1,8 +1,8 @@
-# jQuery Lightbox
+# lightboxLink
 
-### Lightbox widgets
+## Lightbox link utilities
 
-Lightbox widgets that extend [jQuery UI's dialog](https://jqueryui.com/dialog/) widget for lightboxes to display images and other dialog stylings.
+jQuery plugins that allow elements on the page to set handlers that will open modal lightbox dialogs with dynamic content.
 
 ## Usage
 
@@ -17,14 +17,15 @@ Lightbox widgets that extend [jQuery UI's dialog](https://jqueryui.com/dialog/) 
 2. Include plugin's code:
 
 	```html
-	<script src="dist/jquery.lightbox.min.js"></script>
+	<link rel="stylesheet" href="dist/css/northrose-lightbox.css">
+	<script src="dist/js/northrose-lightboxlink.min.js"></script>
 	```
 
 3. Call the plugin:
 
 	```javascript
-	$("#element").lightbox({
-		propertyName: "a custom value"
+	$("#element").lightboxLink({
+		optionName: "a custom value"
 	});
 	```
 
@@ -34,11 +35,20 @@ TK
 
 ## Installation
 
-Clone this repo, and then from the project root directory:
+1. `git clone` this repo
+2. `npm install` in the project's root directory
 
-```
-npm install
-```
+## Demo
+
+### Installation
+
+1. `cd` to `demo` directory
+2. `npm install`
+ 
+### Running the demo
+ 
+1. Command line: `npm start` in the `demo` directory
+2. `http://localhost:3000` in a browser
 
 ## Testing
 
