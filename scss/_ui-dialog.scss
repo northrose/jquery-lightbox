@@ -1,6 +1,6 @@
 .ui-widget-overlay {
 	background: #000;
-	@include opacity(0.6);
+	opacity: 0.6;
 }
 .lightbox-image {
 	.ui-dialog-titlebar {

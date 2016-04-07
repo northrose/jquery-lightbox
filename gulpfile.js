@@ -56,10 +56,7 @@ gulp.task('uglify', function() {
 
 gulp.task('sass', function() {
    return gulp.src('scss/app.scss')
-       .pipe($.compass({
-           project: __dirname,
-           sass: 'scss'
-       }))
+       .pipe($.sass())
        .on('error', function(error) {
             console.log(error);
             this.emit('end');

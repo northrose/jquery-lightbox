@@ -32,32 +32,20 @@ Lightbox widgets that extend [jQuery UI's dialog](https://jqueryui.com/dialog/) 
 
 TK
 
-## Prerequisites
-
-### `npm`
-
-[Installing `npm`](https://docs.npmjs.com/getting-started/installing-node)
-
-### Testing
-
-Install `karma` globally.
-
-```
-npm install karma -g
-```
-
-Run tests (from project root directory) with 
-
-```
-gulp tests
-```
-
 ## Installation
 
-From the project root directory:
+Clone this repo, and then from the project root directory:
 
 ```
 npm install
+```
+
+## Testing
+
+Run tests (from project root directory) with
+
+```
+gulp tests
 ```
 
 ## Contributing
