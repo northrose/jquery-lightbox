@@ -1,6 +1,6 @@
-;(function ( $, window, document, undefined ) {
+;( function( $, window, document, undefined ) {
 
-    $.widget( "northrose.imageLightboxLink" , $.northrose.lightboxLink, {
+    $.widget( "northrose.imageLightboxLink", $.northrose.lightboxLink, {
 
         /**
          * Widget properties.
@@ -10,23 +10,27 @@
             cssClass: "lightbox-image",
             urls: {
                 dialogContent: "/ajax/lightbox-image"
+            },
+            keys: {
+                imagePath: "src",
+                imageAltText: "alt"
             }
         },
 
         bindDialogHandlers: function( response, status, xhr ) {
-            this._super();
+            this._super( response, status, xhr );
 
             /* center the dialog after images have been loaded */
             $( this.options.dom.modalContentContainer + " img" )
-                .off( "load", $.proxy(this.centerDialog, this ) )
-                .on( "load", $.proxy(this.centerDialog, this ) );
+                .off( "load", $.proxy( this.centerDialog, this ) )
+                .on( "load", $.proxy( this.centerDialog, this ) );
 
             /* dismiss dialog by clicking on images */
             $( this.options.dom.modalContentContainer + " img" )
-                .off( "load", $.proxy(this.centerDialog, this ) )
+                .off( "click", $.proxy( this.close, this ) )
                 .on( "click", $.proxy( this.close, this ) );
         },
-        
+
         centerDialog: function() {
             $( this.options.dom.modalWidget )
                 .position( {
@@ -35,21 +39,21 @@
                     of: $( this.options.dom.overlay )
                 } );
         },
-        
+
         /**
          * Retrieves dialog property values from element attributes.
          * @returns {{src: *, alt: *}}
          */
         collectDialogProperties: function() {
             var data = {
-                src: $( this.element ).data( "src" ),
-                alt: $( this.element ).data( "alt" )
+                src: $( this.element ).data( this.options.keys.imagePath ),
+                alt: $( this.element ).data( this.options.keys.imageAltText )
             };
             if ( !data.src ) {
                 throw( "Image not provided." );
             }
             return data;
         }
-    });
+    } );
 
-})( jQuery, window, document );
+} )( jQuery, window, document );

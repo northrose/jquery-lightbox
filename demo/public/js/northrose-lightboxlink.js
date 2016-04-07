@@ -1,3 +1,11 @@
+/*
+ *  jquery-lightbox - v0.0.1
+ *  Basic lightbox built off jQuery UI modal dialogs
+ *  http://northrosedevs.com
+ *
+ *  Made by Damien Barchowsky
+ *  Under MIT License
+ */
 ;( function( $, window, document, undefined ) {
 
     $.widget( "northrose.lightboxLink", {
@@ -157,6 +165,119 @@
                     break;
             }
             this._super( "_setOption", key, value );
+        }
+    } );
+
+} )( jQuery, window, document );
+
+/*
+ *  jquery-lightbox - v0.0.1
+ *  Basic lightbox built off jQuery UI modal dialogs
+ *  http://northrosedevs.com
+ *
+ *  Made by Damien Barchowsky
+ *  Under MIT License
+ */
+;( function( $, window, document, undefined ) {
+
+    $.widget( "northrose.imageLightboxLink", $.northrose.lightboxLink, {
+
+        /**
+         * Widget properties.
+         */
+        options: {
+            dataType: "html",
+            cssClass: "lightbox-image",
+            urls: {
+                dialogContent: "/ajax/lightbox-image"
+            },
+            keys: {
+                imagePath: "src",
+                imageAltText: "alt"
+            }
+        },
+
+        bindDialogHandlers: function( response, status, xhr ) {
+            this._super( response, status, xhr );
+
+            /* center the dialog after images have been loaded */
+            $( this.options.dom.modalContentContainer + " img" )
+                .off( "load", $.proxy( this.centerDialog, this ) )
+                .on( "load", $.proxy( this.centerDialog, this ) );
+
+            /* dismiss dialog by clicking on images */
+            $( this.options.dom.modalContentContainer + " img" )
+                .off( "click", $.proxy( this.close, this ) )
+                .on( "click", $.proxy( this.close, this ) );
+        },
+
+        centerDialog: function() {
+            $( this.options.dom.modalWidget )
+                .position( {
+                    my: "center",
+                    at: "center",
+                    of: $( this.options.dom.overlay )
+                } );
+        },
+
+        /**
+         * Retrieves dialog property values from element attributes.
+         * @returns {{src: *, alt: *}}
+         */
+        collectDialogProperties: function() {
+            var data = {
+                src: $( this.element ).data( this.options.keys.imagePath ),
+                alt: $( this.element ).data( this.options.keys.imageAltText )
+            };
+            if ( !data.src ) {
+                throw( "Image not provided." );
+            }
+            return data;
+        }
+    } );
+
+} )( jQuery, window, document );
+
+/*
+ *  jquery-lightbox - v0.0.1
+ *  Basic lightbox built off jQuery UI modal dialogs
+ *  http://northrosedevs.com
+ *
+ *  Made by Damien Barchowsky
+ *  Under MIT License
+ */
+;( function( $, window, document, undefined ) {
+
+    // define your widget under a namespace of your choice
+    //  with additional parameters e.g.
+    // $.widget( "namespace.widgetname", (optional) - an
+    // existing widget prototype to inherit from, an object
+    // literal to become the widget's prototype );
+
+    $.widget( "northrose.formLightboxLink", $.northrose.lightboxLink, {
+
+        options: {
+            dataType: "html",
+            dom: {
+                cancelButton: ".dlg-cancel-btn",
+                datePicker: ".datepicker",
+                submitButton: "dlg-commit-btn"
+            }
+        },
+
+        bindDialogHandlers: function( response, status, xhr ) {
+            this._super( response, status, xhr );
+
+            /* datepicker widgets */
+            $( this.options.dom.datePicker, $( this.element ) ).datepicker();
+
+            /* form buttons */
+            $( this.options.dom.submitButton, $( this.element ) )
+                .button()
+                .on( "click", $.proxy( this.commitOperation, this ) );
+            $( this.options.dom.cancelButton, $( this.element ) )
+                .button()
+                .on( "click", $.proxy( this.close, this ) );
         }
     } );
 

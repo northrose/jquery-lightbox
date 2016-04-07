@@ -35,7 +35,7 @@ describe("jQuery Lightbox Core", function() {
     it("Should allow custom callback configuration", function () {
         $e.lightbox({
             callbacks: {
-                openSuccess: function(data) {
+                openSuccess: function() {
                     return;
                 }
             }

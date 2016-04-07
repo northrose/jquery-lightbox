@@ -36,18 +36,17 @@ gulp.task('concat', function() {
    return gulp.src([ 
        './src/northrose.lightboxLink.js', 
        './src/northrose.imageLightboxLink.js', 
-       './src/northrose.formLightboxLink.js', 
-       './src/jquery.lightbox.js' 
+       './src/northrose.formLightboxLink.js'
    ] )
        .pipe($.banner(comment, { pkg: pkg }))
-       .pipe($.concat('jquery.lightbox.js'))
+       .pipe($.concat('northrose-lightboxlink.js'))
        .pipe(gulp.dest('./dist/'))
        .pipe(gulp.dest('./demo/public/js/'));
 });
 
 gulp.task('uglify', function() {
-   return gulp.src('./dist/jquery.lightbox.js')
-       .pipe($.rename('jquery.lightbox.min.js'))
+   return gulp.src('./dist/northrose-lightboxlink.js')
+       .pipe($.rename('northrose-lightboxlink.min.js'))
        .pipe($.uglify())
        .pipe($.banner(comment, { pkg: pkg }))
        .pipe(gulp.dest('./dist/'))
@@ -66,7 +65,7 @@ gulp.task('sass', function() {
        }))
        .pipe($.cssnano())
        .pipe(gulp.dest('./demo/public/css/'))
-       .pipe($.rename('northrose-modallink.css'))
+       .pipe($.rename('northrose-lightboxlink.css'))
        .pipe(gulp.dest('./dist/'));
 });
 

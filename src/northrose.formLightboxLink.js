@@ -1,4 +1,4 @@
-;(function ( $, window, document, undefined ) {
+;( function( $, window, document, undefined ) {
 
     // define your widget under a namespace of your choice
     //  with additional parameters e.g.
@@ -6,7 +6,7 @@
     // existing widget prototype to inherit from, an object
     // literal to become the widget's prototype );
 
-    $.widget( "northrose.formLightboxLink" , $.northrose.lightboxLink, {
+    $.widget( "northrose.formLightboxLink", $.northrose.lightboxLink, {
 
         options: {
             dataType: "html",
@@ -16,9 +16,9 @@
                 submitButton: "dlg-commit-btn"
             }
         },
-        
+
         bindDialogHandlers: function( response, status, xhr ) {
-            this._super();
+            this._super( response, status, xhr );
 
             /* datepicker widgets */
             $( this.options.dom.datePicker, $( this.element ) ).datepicker();
@@ -31,6 +31,6 @@
                 .button()
                 .on( "click", $.proxy( this.close, this ) );
         }
-    });
+    } );
 
-})( jQuery, window, document );
+} )( jQuery, window, document );
