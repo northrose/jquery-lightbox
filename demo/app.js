@@ -34,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/lightbox/image', routes);
+app.use('/lightbox/test-content', routes);
 app.use('/users', users);
 
 // catch 404 and forward to error handler

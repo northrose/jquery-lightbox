@@ -8,7 +8,7 @@
         options: {
             dataType: 'html',
             dialogOptions: {
-                dialogClass: 'lightbox-image',
+                dialogClass: 'lightbox lightbox-image',
                 draggable: false,
                 resizable: false
             },

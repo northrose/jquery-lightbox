@@ -20,6 +20,7 @@
             dialogOptions: {
                 autoOpen: false,
                 closeOnEscape: true,
+                dialogClass: 'lightbox',
                 height: 'auto',
                 modal: true,
                 title: '',
@@ -34,6 +35,9 @@
                 overlay: '.ui-widget-overlay'
             },
             event: 'click',
+            keys: {
+                dataSource: 'src'
+            },
             urls: {
                 dialogContent: ''
             }
@@ -88,15 +92,10 @@
 
         /**
          * Retrieves dialog property values from element attributes.
-         * @returns generic object
+         * @returns object
          */
         collectDialogProperties: function() {
-            var data = {};
-            data.url = $( this.element ).data('url');
-            if ( !data.url ) {
-                throw( 'URL not provided.' );
-            }
-            return data;
+            return {};
         },
 
         /**
@@ -123,6 +122,25 @@
         },
 
         /**
+         * Returns the url to use to fetch lightbox content. First checks 
+         * the object's internal "dialogContent" property. If that is 
+         * not set, it will check the data- attribute of the element specifying
+         * the source.
+         * @param data
+         * @returns {string}
+         */
+        getLightboxContentURL: function(data) {
+            var url = this.options.urls.dialogContent;
+            if (!url) {
+                url = $(this.element).data(this.options.keys.dataSource);
+            }
+            if (!url) {
+                throw('Lightbox content not specified!');
+            }
+            return (url);
+        },
+        
+        /**
          * Event handler that opens a modal dialog in response to an event.
          * @param evt
          */
@@ -132,15 +150,23 @@
                 var data = this.collectDialogProperties();
             }
             catch ( err ) {
-                this.displayError( err );
+                this.displayError(err);
                 return;
             }
 
+            try {
+                var url = this.getLightboxContentURL(data);
+            }
+            catch(err) {
+                this.displayError(err);
+                return;
+            }
+            
             $( this.options.dom.modalContainer )
                 .dialog(this.options.dialogOptions);
             $( this.options.dom.modalContentContainer )
                 .load(
-                    this.options.urls.dialogContent,
+                    url,
                     data,
                     $.proxy( this.bindDialogHandlers, this )
                 );
@@ -185,7 +211,7 @@
         options: {
             dataType: 'html',
             dialogOptions: {
-                dialogClass: 'lightbox-image',
+                dialogClass: 'lightbox lightbox-image',
                 draggable: false,
                 resizable: false
             },

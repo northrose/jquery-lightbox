@@ -2,19 +2,10 @@
 	background: #000;
 	opacity: 0.6;
 }
-.lightbox-image {
-	&.ui-widget-content {
-		border: 1px solid #666;
-		background: #333;
-	}
+.lightbox {
 	&.ui-dialog {
 		overflow: initial;
-	}
-	.dialog-content {
-		line-height: 0;
-	}
-	.ui-dialog-content {
-		padding: .1em;
+		max-width: 80%;
 	}
 	.ui-dialog-title {
 		margin: 0;
@@ -44,5 +35,20 @@
 	.ui-state-default {
 		background: #333;
 		border: 3px solid #ccc;
+	}
+}
+.lightbox-image {
+	&.ui-dialog {
+		max-width: initial;
+	}
+	&.ui-widget-content {
+		border: 1px solid #666;
+		background: #333;
+	}
+	.dialog-content {
+		line-height: 0;
+	}
+	.ui-dialog-content {
+		padding: .1em;
 	}
 }
