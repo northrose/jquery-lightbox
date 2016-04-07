@@ -8,8 +8,15 @@
                 modalContentLoaded: null,
                 openFailure: null
             },
-            cssClass: '',
             dataType: 'html',
+            dialogOptions: {
+                autoOpen: false,
+                closeOnEscape: true,
+                height: 'auto',
+                modal: true,
+                title: '',
+                width: 'auto'
+            },
             dom: {
                 errorContainer: '.alert-error:first',
                 modalContainer: '#globalDialog',
@@ -19,11 +26,9 @@
                 overlay: '.ui-widget-overlay'
             },
             event: 'click',
-            height: 'auto',
             urls: {
                 dialogContent: ''
-            },
-            width: 'auto'
+            }
         },
 
         //Setup widget (eg. element creation, apply theming
@@ -124,15 +129,7 @@
             }
 
             $( this.options.dom.modalContainer )
-                .dialog( {
-                    autoOpen: false,
-                    closeOnEscape: true,
-                    dialogClass: this.options.cssClass,
-                    height: this.options.height,
-                    modal: true,
-                    title: '',
-                    width: this.options.width
-                } );
+                .dialog(this.options.dialogOptions);
             $( this.options.dom.modalContentContainer )
                 .load(
                     this.options.urls.dialogContent,

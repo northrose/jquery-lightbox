@@ -3,7 +3,46 @@
 	opacity: 0.6;
 }
 .lightbox-image {
+	&.ui-widget-content {
+		border: 1px solid #666;
+		background: #333;
+	}
+	&.ui-dialog {
+		overflow: initial;
+	}
+	.dialog-content {
+		line-height: 0;
+	}
+	.ui-dialog-content {
+		padding: .1em;
+	}
+	.ui-dialog-title {
+		margin: 0;
+	}
 	.ui-dialog-titlebar {
-		display: none;
+		padding: 0;
+	}
+	.ui-widget-header {
+		border: 0;
+		background: transparent;
+	}
+	.ui-dialog-titlebar-close {
+		z-index: 102;
+		top: -0.9rem;
+		right: -0.9rem;
+		margin: 0;
+		width: 1.8rem;
+		height: 1.8rem;
+		border-radius: .9rem;
+		&:hover {
+			background-color: #4b4b4b;
+		}
+	}
+	.ui-icon-closethick {
+		background-image: url("images/ui-icons_ffffff_256x240.png");
+	}
+	.ui-state-default {
+		background: #333;
+		border: 3px solid #ccc;
 	}
 }

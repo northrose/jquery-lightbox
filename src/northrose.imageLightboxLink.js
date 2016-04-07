@@ -7,7 +7,11 @@
          */
         options: {
             dataType: 'html',
-            cssClass: 'lightbox-image',
+            dialogOptions: {
+                dialogClass: 'lightbox-image',
+                draggable: false,
+                resizable: false
+            },
             urls: {
                 dialogContent: '/ajax/lightbox-image'
             },

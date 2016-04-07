@@ -40,16 +40,16 @@ gulp.task('concat', function() {
    ] )
        .pipe($.banner(comment, { pkg: pkg }))
        .pipe($.concat('northrose-lightboxlink.js'))
-       .pipe(gulp.dest('./dist/'))
+       .pipe(gulp.dest('./dist/js/'))
        .pipe(gulp.dest('./demo/public/js/'));
 });
 
 gulp.task('uglify', function() {
-   return gulp.src('./dist/northrose-lightboxlink.js')
+   return gulp.src('./dist/js/northrose-lightboxlink.js')
        .pipe($.rename('northrose-lightboxlink.min.js'))
        .pipe($.uglify())
        .pipe($.banner(comment, { pkg: pkg }))
-       .pipe(gulp.dest('./dist/'))
+       .pipe(gulp.dest('./dist/js/'))
        .pipe(gulp.dest('./demo/public/js/'));
 });
 
@@ -66,7 +66,7 @@ gulp.task('sass', function() {
        .pipe($.cssnano())
        .pipe(gulp.dest('./demo/public/css/'))
        .pipe($.rename('northrose-lightboxlink.css'))
-       .pipe(gulp.dest('./dist/'));
+       .pipe(gulp.dest('./dist/css/'));
 });
 
 gulp.task('lint', ['jshint'], function(cb) {
