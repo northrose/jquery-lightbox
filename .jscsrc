@@ -1,5 +1,7 @@
 {
   "preset": "jquery",
   "requireCapitalizedComments": null,
+  "requireSpacesInsideParentheses": null,
+  "validateQuoteMarks": "'",
   "excludeFiles": [ "node_modules" ]
 }

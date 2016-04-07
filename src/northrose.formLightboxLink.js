@@ -1,19 +1,13 @@
 ;( function( $, window, document, undefined ) {
 
-    // define your widget under a namespace of your choice
-    //  with additional parameters e.g.
-    // $.widget( "namespace.widgetname", (optional) - an
-    // existing widget prototype to inherit from, an object
-    // literal to become the widget's prototype );
-
-    $.widget( "northrose.formLightboxLink", $.northrose.lightboxLink, {
+    $.widget( 'northrose.formLightboxLink', $.northrose.lightboxLink, {
 
         options: {
-            dataType: "html",
+            dataType: 'html',
             dom: {
-                cancelButton: ".dlg-cancel-btn",
-                datePicker: ".datepicker",
-                submitButton: "dlg-commit-btn"
+                cancelButton: '.dlg-cancel-btn',
+                datePicker: '.datepicker',
+                submitButton: 'dlg-commit-btn'
             }
         },
 
@@ -26,10 +20,10 @@
             /* form buttons */
             $( this.options.dom.submitButton, $( this.element ) )
                 .button()
-                .on( "click", $.proxy( this.commitOperation, this ) );
+                .on( 'click', $.proxy( this.commitOperation, this ) );
             $( this.options.dom.cancelButton, $( this.element ) )
                 .button()
-                .on( "click", $.proxy( this.close, this ) );
+                .on( 'click', $.proxy( this.close, this ) );
         }
     } );
 

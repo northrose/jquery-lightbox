@@ -8,7 +8,7 @@
  */
 ;( function( $, window, document, undefined ) {
 
-    $.widget( "northrose.lightboxLink", {
+    $.widget( 'northrose.lightboxLink', {
 
         //Options to be used as defaults
         options: {
@@ -16,22 +16,22 @@
                 modalContentLoaded: null,
                 openFailure: null
             },
-            cssClass: "",
-            dataType: "html",
+            cssClass: '',
+            dataType: 'html',
             dom: {
-                errorContainer: ".alert-error:first",
-                modalContainer: "#globalDialog",
-                modalContentContainer: "#globalDialog .dialog-content",
-                modalErrorContainer: "#globalDialog .alert-error",
-                modalWidget: ".ui-dialog",
-                overlay: ".ui-widget-overlay"
+                errorContainer: '.alert-error:first',
+                modalContainer: '#globalDialog',
+                modalContentContainer: '#globalDialog .dialog-content',
+                modalErrorContainer: '#globalDialog .alert-error',
+                modalWidget: '.ui-dialog',
+                overlay: '.ui-widget-overlay'
             },
-            event: "click",
-            height: "auto",
+            event: 'click',
+            height: 'auto',
             urls: {
-                dialogContent: ""
+                dialogContent: ''
             },
-            width: "auto"
+            width: 'auto'
         },
 
         //Setup widget (eg. element creation, apply theming
@@ -51,24 +51,24 @@
          */
         bindDialogHandlers: function( response, status, xhr ) {
 
-            if ( status === "error" ) {
+            if ( status === 'error' ) {
                 /* handle ajax errors */
-                this.displayError( "Error loading dialog: " + xhr.statusText );
-                if ( typeof this.options.callbacks.openFailure === "function" ) {
+                this.displayError( 'Error loading dialog: ' + xhr.statusText );
+                if ( typeof this.options.callbacks.openFailure === 'function' ) {
                     this.options.callbacks.openFailure( data );
                 }
                 return;
             }
 
             /* display the dialog element */
-            $( this.options.dom.modalContainer ).dialog( "open" );
+            $( this.options.dom.modalContainer ).dialog( 'open' );
 
             /* dismiss dialog by clicking on overlay */
             $( this.options.dom.overlay )
-                .on( "click", $.proxy( this.close, this ) );
+                .on( 'click', $.proxy( this.close, this ) );
 
             /* invoke user-defined callback */
-            if ( typeof this.options.callbacks.modalContentLoaded === "function" ) {
+            if ( typeof this.options.callbacks.modalContentLoaded === 'function' ) {
                 var f = this.options.callbacks.modalContentLoaded;
                 f.apply( this, Array.prototype.slice.call( arguments, 1 ) );
             }
@@ -78,7 +78,7 @@
          * Closes the dialog.
          */
         close: function() {
-            $( this.options.dom.modalContainer ).dialog( "close" );
+            $( this.options.dom.modalContainer ).dialog( 'close' );
         },
 
         /**
@@ -87,9 +87,9 @@
          */
         collectDialogProperties: function() {
             var data = {};
-            data.url = $( this.element ).data( "url" );
+            data.url = $( this.element ).data('url');
             if ( !data.url ) {
-                throw( "URL not provided." );
+                throw( 'URL not provided.' );
             }
             return data;
         },
@@ -98,7 +98,7 @@
          * Placeholder for routine definition in derived plugin, e.g. formLightboxLink
          */
         commitOperation: function() {
-            throw( "commitOperation() not implemented." );
+            throw( 'commitOperation() not implemented.' );
         },
 
         /**
@@ -114,7 +114,7 @@
             if ( $e.length === 0 ) {
                 return;
             }
-            $e.html( msg ).show( "slow" );
+            $e.html( msg ).show( 'slow' );
         },
 
         /**
@@ -138,7 +138,7 @@
                     dialogClass: this.options.cssClass,
                     height: this.options.height,
                     modal: true,
-                    title: "",
+                    title: '',
                     width: this.options.width
                 } );
             $( this.options.dom.modalContentContainer )
@@ -155,7 +155,7 @@
          */
         _setOption: function( key, value ) {
             switch ( key ) {
-                case "someValue":
+                case 'someValue':
 
                     //this.options.someValue = doSomethingWith( value );
                     break;
@@ -164,7 +164,7 @@
                     //this.options[ key ] = value;
                     break;
             }
-            this._super( "_setOption", key, value );
+            this._super( '_setOption', key, value );
         }
     } );
 
@@ -180,20 +180,20 @@
  */
 ;( function( $, window, document, undefined ) {
 
-    $.widget( "northrose.imageLightboxLink", $.northrose.lightboxLink, {
+    $.widget( 'northrose.imageLightboxLink', $.northrose.lightboxLink, {
 
         /**
          * Widget properties.
          */
         options: {
-            dataType: "html",
-            cssClass: "lightbox-image",
+            dataType: 'html',
+            cssClass: 'lightbox-image',
             urls: {
-                dialogContent: "/ajax/lightbox-image"
+                dialogContent: '/ajax/lightbox-image'
             },
             keys: {
-                imagePath: "src",
-                imageAltText: "alt"
+                imagePath: 'src',
+                imageAltText: 'alt'
             }
         },
 
@@ -201,21 +201,21 @@
             this._super( response, status, xhr );
 
             /* center the dialog after images have been loaded */
-            $( this.options.dom.modalContentContainer + " img" )
-                .off( "load", $.proxy( this.centerDialog, this ) )
-                .on( "load", $.proxy( this.centerDialog, this ) );
+            $( this.options.dom.modalContentContainer + ' img' )
+                .off( 'load', $.proxy( this.centerDialog, this ) )
+                .on( 'load', $.proxy( this.centerDialog, this ) );
 
             /* dismiss dialog by clicking on images */
-            $( this.options.dom.modalContentContainer + " img" )
-                .off( "click", $.proxy( this.close, this ) )
-                .on( "click", $.proxy( this.close, this ) );
+            $( this.options.dom.modalContentContainer + ' img' )
+                .off( 'click', $.proxy( this.close, this ) )
+                .on( 'click', $.proxy( this.close, this ) );
         },
 
         centerDialog: function() {
             $( this.options.dom.modalWidget )
                 .position( {
-                    my: "center",
-                    at: "center",
+                    my: 'center',
+                    at: 'center',
                     of: $( this.options.dom.overlay )
                 } );
         },
@@ -230,7 +230,7 @@
                 alt: $( this.element ).data( this.options.keys.imageAltText )
             };
             if ( !data.src ) {
-                throw( "Image not provided." );
+                throw( 'Image not provided.' );
             }
             return data;
         }
@@ -248,20 +248,14 @@
  */
 ;( function( $, window, document, undefined ) {
 
-    // define your widget under a namespace of your choice
-    //  with additional parameters e.g.
-    // $.widget( "namespace.widgetname", (optional) - an
-    // existing widget prototype to inherit from, an object
-    // literal to become the widget's prototype );
-
-    $.widget( "northrose.formLightboxLink", $.northrose.lightboxLink, {
+    $.widget( 'northrose.formLightboxLink', $.northrose.lightboxLink, {
 
         options: {
-            dataType: "html",
+            dataType: 'html',
             dom: {
-                cancelButton: ".dlg-cancel-btn",
-                datePicker: ".datepicker",
-                submitButton: "dlg-commit-btn"
+                cancelButton: '.dlg-cancel-btn',
+                datePicker: '.datepicker',
+                submitButton: 'dlg-commit-btn'
             }
         },
 
@@ -274,10 +268,10 @@
             /* form buttons */
             $( this.options.dom.submitButton, $( this.element ) )
                 .button()
-                .on( "click", $.proxy( this.commitOperation, this ) );
+                .on( 'click', $.proxy( this.commitOperation, this ) );
             $( this.options.dom.cancelButton, $( this.element ) )
                 .button()
-                .on( "click", $.proxy( this.close, this ) );
+                .on( 'click', $.proxy( this.close, this ) );
         }
     } );
 

@@ -1,19 +1,19 @@
 ;( function( $, window, document, undefined ) {
 
-    $.widget( "northrose.imageLightboxLink", $.northrose.lightboxLink, {
+    $.widget( 'northrose.imageLightboxLink', $.northrose.lightboxLink, {
 
         /**
          * Widget properties.
          */
         options: {
-            dataType: "html",
-            cssClass: "lightbox-image",
+            dataType: 'html',
+            cssClass: 'lightbox-image',
             urls: {
-                dialogContent: "/ajax/lightbox-image"
+                dialogContent: '/ajax/lightbox-image'
             },
             keys: {
-                imagePath: "src",
-                imageAltText: "alt"
+                imagePath: 'src',
+                imageAltText: 'alt'
             }
         },
 
@@ -21,21 +21,21 @@
             this._super( response, status, xhr );
 
             /* center the dialog after images have been loaded */
-            $( this.options.dom.modalContentContainer + " img" )
-                .off( "load", $.proxy( this.centerDialog, this ) )
-                .on( "load", $.proxy( this.centerDialog, this ) );
+            $( this.options.dom.modalContentContainer + ' img' )
+                .off( 'load', $.proxy( this.centerDialog, this ) )
+                .on( 'load', $.proxy( this.centerDialog, this ) );
 
             /* dismiss dialog by clicking on images */
-            $( this.options.dom.modalContentContainer + " img" )
-                .off( "click", $.proxy( this.close, this ) )
-                .on( "click", $.proxy( this.close, this ) );
+            $( this.options.dom.modalContentContainer + ' img' )
+                .off( 'click', $.proxy( this.close, this ) )
+                .on( 'click', $.proxy( this.close, this ) );
         },
 
         centerDialog: function() {
             $( this.options.dom.modalWidget )
                 .position( {
-                    my: "center",
-                    at: "center",
+                    my: 'center',
+                    at: 'center',
                     of: $( this.options.dom.overlay )
                 } );
         },
@@ -50,7 +50,7 @@
                 alt: $( this.element ).data( this.options.keys.imageAltText )
             };
             if ( !data.src ) {
-                throw( "Image not provided." );
+                throw( 'Image not provided.' );
             }
             return data;
         }
