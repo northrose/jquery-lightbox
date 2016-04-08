@@ -1,6 +1,6 @@
 {
   "name": "lightboxLink",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Attach behaviors to DOM elements that will open modal lightbox dialogs",
   "keywords": [
     "jquery-plugin",
