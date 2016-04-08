@@ -40,7 +40,7 @@
                 .position( {
                     my: 'center',
                     at: 'center',
-                    of: $( this.options.dom.overlay )
+                    of: window
                 } );
         },
 
