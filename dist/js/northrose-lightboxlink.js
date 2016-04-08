@@ -1,6 +1,6 @@
 /*
- *  jquery-lightbox - v0.0.1
- *  Basic lightbox built off jQuery UI modal dialogs
+ *  lightboxLink - v0.1.0
+ *  Attach behaviors to DOM elements that will open modal lightbox dialogs
  *  http://northrosedevs.com
  *
  *  Made by Damien Barchowsky
@@ -194,8 +194,8 @@
 } )( jQuery, window, document );
 
 /*
- *  jquery-lightbox - v0.0.1
- *  Basic lightbox built off jQuery UI modal dialogs
+ *  lightboxLink - v0.1.0
+ *  Attach behaviors to DOM elements that will open modal lightbox dialogs
  *  http://northrosedevs.com
  *
  *  Made by Damien Barchowsky
@@ -266,8 +266,8 @@
 } )( jQuery, window, document );
 
 /*
- *  jquery-lightbox - v0.0.1
- *  Basic lightbox built off jQuery UI modal dialogs
+ *  lightboxLink - v0.1.0
+ *  Attach behaviors to DOM elements that will open modal lightbox dialogs
  *  http://northrosedevs.com
  *
  *  Made by Damien Barchowsky

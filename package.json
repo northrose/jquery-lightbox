@@ -4,6 +4,7 @@
   "description": "Attach behaviors to DOM elements that will open modal lightbox dialogs",
   "keywords": [
     "jquery-plugin",
+    "ecosystem:jquery",
     "jquery",
     "lightbox",
     "modal",

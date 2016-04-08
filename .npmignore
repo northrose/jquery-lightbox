@@ -1,2 +1,14 @@
-.gitignore
 bower_components/
+demo/
+node_modules/
+scss/
+src/
+test/
+.editorconfig
+.gitignore
+.jscsrc
+.jshintrc
+.npmignore
+.travis.yml
+bower.json
+karma.conf.js
